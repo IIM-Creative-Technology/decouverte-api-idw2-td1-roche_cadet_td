@@ -9,10 +9,38 @@
         * {
             margin: 0;
             padding: 0;
+            background-color: rgb(49, 49, 49);
+            color: lightgray;
+        }
+
+        #course{
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        #arti_all{
+            width: 32%;
+            margin: 5px;
+            border: double lightgray;
+        }
+
+        #arti_all article{
+            padding: 3px;            
+        }
+
+        #arti_img, #arti_title, #arti_prog, #arti_year, #arti_date{
+            border-block: inherit;
+        }
+        
+        #arti_img{
+            display: flex;
+            justify-content: center;
+            height: 20vh;
         }
 
         #arti_img img {
-            width: 20%;
+            height: 20vh;
         }
     </style>
 </head>
@@ -47,6 +75,8 @@
                 console.log(data);
                 let cour = data;
                 return cour.map(function(cour) {
+                    let arti_all = createNode('article');
+
                     let arti_img = createNode('article');
                     let img_cour = createNode('img');
 
@@ -63,7 +93,7 @@
                     let arti_date = createNode('article');
                     let date_cour = createNode('p');
 
-
+                    arti_all.id = "arti_all";
                     arti_img.id = "arti_img";
                     arti_title.id = "arti_title";
                     arti_prog.id = "arti_prog";
@@ -71,20 +101,28 @@
                     arti_date.id = "arti_date";
 
                     img_cour.src = `${cour.image_url}`;
-                    title_cour.innerHTML = `${cour.nom}`;
+                    title_cour.innerHTML = `Cours : ${cour.nom}`;
                     descr_cour.innerHTML = `${cour.description}`;
-                    prog_cour.innerHTML = `${cour.programme}`;
-                    year_cour.innerHTML = `${cour.year}`;
+                    prog_cour.innerHTML = `Programme : ${cour.programme}`;
+                    year_cour.innerHTML = `Année : ${cour.year}`;
                     date_cour.innerHTML = `${cour.created_at} -  ${cour.updated_at}`;
 
-                    append(pic, arti_img);
+                    append(pic, arti_all);
+
+                    append(arti_all, arti_img);
                     append(arti_img, img_cour);
-                    append(pic, arti_title);
+
+                    append(arti_all, arti_title);
                     append(arti_title, title_cour);
                     append(arti_title, descr_cour);
-                    append(pic, arti_year);
+
+                    append(arti_all, arti_prog);
+                    append(arti_prog, prog_cour);
+                    
+                    append(arti_all, arti_year);
                     append(arti_year, year_cour);
-                    append(pic, arti_date);
+
+                    append(arti_all, arti_date);
                     append(arti_date, date_cour);
 
                     // articles.id=`${cour.id}`
