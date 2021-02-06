@@ -13,27 +13,32 @@
             color: lightgray;
         }
 
-        #course{
+        #course {
             margin: auto;
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
         }
-        
-        #arti_all{
-            width: 32%;
+
+        #arti_all {
+            width: 30%;
             margin: 5px;
             border: double lightgray;
         }
 
-        #arti_all article{
-            padding: 3px;            
+        #arti_all article {
+            padding: 3px;
         }
 
-        #arti_img, #arti_title, #arti_prog, #arti_year, #arti_date{
+        #arti_img,
+        #arti_title,
+        #arti_prog,
+        #arti_year,
+        #arti_date {
             border-block: inherit;
         }
-        
-        #arti_img{
+
+        #arti_img {
             display: flex;
             justify-content: center;
             height: 20vh;
@@ -99,13 +104,19 @@
                     arti_prog.id = "arti_prog";
                     arti_year.id = "arti_year";
                     arti_date.id = "arti_date";
+                    
 
                     img_cour.src = `${cour.image_url}`;
                     title_cour.innerHTML = `Cours : ${cour.nom}`;
                     descr_cour.innerHTML = `${cour.description}`;
                     prog_cour.innerHTML = `Programme : ${cour.programme}`;
                     year_cour.innerHTML = `Année : ${cour.year}`;
-                    date_cour.innerHTML = `${cour.created_at} -  ${cour.updated_at}`;
+                    
+                    var dateStart = cour.created_at.split("-");
+                    var dateEnd = cour.updated_at.split("-");
+                    var jsStart = new Date(dateStart[0], dateStart[1] - 1, dateStart[2].substr(0, 2));
+                    var jsEnd = new Date(dateEnd[0], dateEnd[1] - 1, dateEnd[2].substr(0, 2));
+                    date_cour.innerHTML = `${jsStart} -  ${jsEnd}`;
 
                     append(pic, arti_all);
 
@@ -118,7 +129,7 @@
 
                     append(arti_all, arti_prog);
                     append(arti_prog, prog_cour);
-                    
+
                     append(arti_all, arti_year);
                     append(arti_year, year_cour);
 
